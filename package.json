@@ -1,0 +1,25 @@
+{
+  "name": "cordova-plugin-contacts-save",
+  "version": "0.0.1",
+  "description": "Cordova Contacts Save Plugin",
+  "cordova": {
+    "id": "cordova-plugin-contacts-save",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ikosta/cordova-plugin-contacts-save.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios"
+  ],
+  "author": "Konstantinos Tsanakas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ikosta/cordova-plugin-contacts-save/issues"
+  },
+  "homepage": "https://github.com/ikosta/cordova-plugin-contacts-save#readme"
+}
