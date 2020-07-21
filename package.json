@@ -21,5 +21,6 @@
   "bugs": {
     "url": "https://github.com/ikosta/cordova-plugin-contacts-save/issues"
   },
-  "homepage": "https://github.com/ikosta/cordova-plugin-contacts-save#readme"
+  "homepage": "https://github.com/ikosta/cordova-plugin-contacts-save#readme",
+  "typings": "typings/ContactsSave.d.ts"
 }
