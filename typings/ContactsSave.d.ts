@@ -1,19 +1,21 @@
-declare module "cordova-plugin-contacts-save" {
-  interface CNMutableContact {
-    namePrefix?: string;
-    givenName?: string;
-    familyName?: string;
-  }
+interface CNMutableContact {
+  namePrefix?: string;
+  givenName?: string;
+  familyName?: string;
+}
 
-  type ContactsSaveSuccessHandler = (response: string) => void;
-  type ContactsSaveErrorHandler = (error: string) => void;
+type ContactsSaveSuccessHandler = (response: string) => void;
+type ContactsSaveErrorHandler = (error: string) => void;
 
-  interface ContactsSave {
-    saveContacts(
-      contacts?: CNMutableContact[],
-      container?: string,
-      onSuccess?: ContactsSaveSuccessHandler,
-      onError?: ContactsSaveErrorHandler
-    ): void;
-  }
+declare class ContactsSave {
+  saveContacts(
+    contacts?: CNMutableContact[],
+    container?: string,
+    onSuccess?: ContactsSaveSuccessHandler,
+    onError?: ContactsSaveErrorHandler
+  ): void;
+}
+
+interface Window {
+  ContactsSave: ContactsSave;
 }
