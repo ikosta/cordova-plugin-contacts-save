@@ -20,6 +20,20 @@ cordova plugin add cordova-plugin-contacts-save
 
 - iOS
 
+Dont forget to add `NSContactsUsageDescription` to your `plist`.
+
+You can add this in your `config.xml`.
+
+```xml
+<platform name="ios">
+  ...
+  <edit-config file="*-Info.plist" mode="merge" target="NSContactsUsageDescription">
+    <string>Used to save business cards</string>
+  </edit-config>
+  ...
+</platform>
+```
+
 ## Usage
 
 ```js
