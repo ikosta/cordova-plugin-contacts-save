@@ -201,7 +201,10 @@
         /**
          Note
          */
-        mutableContact.note = contact[@"note"];
+        NSString* note = contact[@"note"];
+        if (![note isEqual:[NSNull null]]) {
+            mutableContact.note = note;
+        }
 
         // create save request
         CNSaveRequest* saveRequest = [[CNSaveRequest alloc] init];
