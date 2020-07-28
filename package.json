@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-contacts-save",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Cordova Contacts Save Plugin",
   "cordova": {
     "id": "cordova-plugin-contacts-save",
