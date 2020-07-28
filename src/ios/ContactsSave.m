@@ -39,15 +39,15 @@
         /**
          Name
          */
-        mutableContact.namePrefix = [contact[@"namePrefix"] stringValue];
-        mutableContact.givenName = [contact[@"givenName"] stringValue];
-        mutableContact.familyName = [contact[@"familyName"] stringValue];
+        mutableContact.namePrefix = contact[@"namePrefix"];
+        mutableContact.givenName = contact[@"givenName"];
+        mutableContact.familyName = contact[@"familyName"];
 
         /**
          Organization
          */
-        mutableContact.organizationName = [contact[@"organizationName"] stringValue];
-        mutableContact.jobTitle = [contact[@"jobTitle"] stringValue];
+        mutableContact.organizationName = contact[@"organizationName"];
+        mutableContact.jobTitle = contact[@"jobTitle"];
 
         /**
          Phone Numbers
@@ -58,13 +58,13 @@
         NSArray* phoneNumbers = contact[@"phoneNumbers"];
         [phoneNumbers enumerateObjectsUsingBlock:^(NSMutableDictionary* _Nonnull labeledItem, NSUInteger idAddresses, BOOL* _Nonnull stopAddresses) {
             // get phone number label
-            NSString* label = [labeledItem[@"label"] stringValue];
+            NSString* label = labeledItem[@"label"];
 
             // get phone number value
             NSDictionary* value = labeledItem[@"value"];
 
             // check phone number value
-            NSString* stringValue = [value[@"stringValue"] stringValue];
+            NSString* stringValue = value[@"stringValue"];
             if (stringValue != nil) {
                 // create phone number
                 CNPhoneNumber* phoneNumber =[CNPhoneNumber phoneNumberWithStringValue:stringValue];
@@ -100,10 +100,10 @@
         NSArray* emailAddresses = contact[@"emailAddresses"];
         [emailAddresses enumerateObjectsUsingBlock:^(NSMutableDictionary* _Nonnull labeledItem, NSUInteger idAddresses, BOOL* _Nonnull stopAddresses) {
             // get email address label
-            NSString* label = [labeledItem[@"label"] stringValue];
+            NSString* label = labeledItem[@"label"];
 
             // get email address value
-            NSString* value = [labeledItem[@"value"] stringValue];
+            NSString* value = labeledItem[@"value"];
 
             // check email address value
             if (value != nil) {
@@ -130,10 +130,10 @@
         NSArray* urlAddresses = contact[@"urlAddresses"];
         [urlAddresses enumerateObjectsUsingBlock:^(NSMutableDictionary* _Nonnull labeledItem, NSUInteger idAddresses, BOOL* _Nonnull stopAddresses) {
             // get email address label
-            NSString* label = [labeledItem[@"label"] stringValue];
+            NSString* label = labeledItem[@"label"];
 
             // get email address value
-            NSString* value = [labeledItem[@"value"] stringValue];
+            NSString* value = labeledItem[@"value"];
 
             // check email address value
             if (value != nil) {
@@ -160,7 +160,7 @@
         NSArray* postalAddresses = contact[@"postalAddresses"];
         [postalAddresses enumerateObjectsUsingBlock:^(NSMutableDictionary* _Nonnull labeledItem, NSUInteger idAddresses, BOOL* _Nonnull stopAddresses) {
             // get postal address label
-            NSString* label = [labeledItem[@"label"] stringValue];
+            NSString* label = labeledItem[@"label"];
 
             // get postal address value
             NSDictionary* value = labeledItem[@"value"];
@@ -169,13 +169,13 @@
             CNMutablePostalAddress* mutablePostalAddress = [[CNMutablePostalAddress alloc] init];
 
             // populate mutable postal address
-            mutablePostalAddress.street = [value[@"street"] stringValue];
-            mutablePostalAddress.city = [value[@"city"] stringValue];
-            mutablePostalAddress.state = [value[@"state"] stringValue];
-            mutablePostalAddress.postalCode = [value[@"postalCode"] stringValue];
-            mutablePostalAddress.ISOCountryCode = [value[@"ISOCountryCode"] stringValue];
+            mutablePostalAddress.street = value[@"street"];
+            mutablePostalAddress.city = value[@"city"];
+            mutablePostalAddress.state = value[@"state"];
+            mutablePostalAddress.postalCode = value[@"postalCode"];
+            mutablePostalAddress.ISOCountryCode = value[@"ISOCountryCode"];
             if (mutablePostalAddress.ISOCountryCode == nil || mutablePostalAddress.ISOCountryCode.length == 0) {
-                mutablePostalAddress.country = [value[@"country"] stringValue];
+                mutablePostalAddress.country = value[@"country"];
             }
 
             // add to mutable postal addresses
@@ -216,9 +216,10 @@
         CNContactStore* store = [[CNContactStore alloc] init];
 
         // execute save request
-        if (![store executeSaveRequest:saveRequest error:nil]) {
+        NSError* error;
+        if (![store executeSaveRequest:saveRequest error:&error]) {
             // save request failed because of missing permission
-            [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"NO_PERMISSON"] callbackId:command.callbackId];
+            [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedFailureReason]] callbackId:command.callbackId];
             return;
         }
     }];
